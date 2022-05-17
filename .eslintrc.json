@@ -1,0 +1,53 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true,
+        "node": true,
+        "mocha": true,
+        "jquery": true
+    },
+    "plugins": [
+        "security-node"
+    ],
+    "extends": ["eslint:recommended",
+    "plugin:security-node/recommended"],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": [
+            "off",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-const-assign": [
+            "error"
+        ],
+        "arrow-body-style": [
+            "error",
+            "always"
+        ],
+        "dot-notation": [
+            "error"
+        ],
+        "eqeqeq": [
+            "error"
+        ],
+        "no-else-return": [
+            "error"
+        ]
+
+    }
+}

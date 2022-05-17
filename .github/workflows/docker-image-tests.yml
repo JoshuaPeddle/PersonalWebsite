@@ -1,0 +1,42 @@
+name: docker-compose-local-mocha UP
+
+env:
+  DB_USER: 123
+  DB_PASS: 123
+  INTERNAL_DB: 27017
+  EXTERNAL_DB: 27017
+  INTERNAL_APP: 8080
+  EXTERNAL_APP: 80
+  DBNAME: "test"
+  MONGODB_CONNSTRING: mongodb://localhost
+  SESSION_SECRET: keyboard-cat
+  ITERATIONS: 310000
+  KEYLEN: 32
+  DIGEST: sha256
+  SERVER_URL: 'http://localhost:80'
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+     - uses: actions/checkout@v1
+     - run: |
+        npm install wait-on mocha dotenv
+        docker buildx create --name mybuilder
+        docker buildx use mybuilder
+        docker compose -f docker-compose.yml up --force-recreate --build -d
+        npx wait-on http://localhost:80 -t 10000
+        npx mocha tests/integration.js 
+
+        
+
+
