@@ -10,4 +10,4 @@ class Listing extends Component{
         return <button onClick={this.sayHello}> Click me!</button>
     }
 }
-export default Button
+export default Listing
