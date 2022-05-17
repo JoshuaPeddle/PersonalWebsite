@@ -23,7 +23,7 @@ const fs = require('fs');
  * Get port from environment and store in Express.
  */
 
-const httpPort = normalizePort(process.env.PORT || '80');
+const httpPort = normalizePort(process.env.PORT || '8080');
 const httpsPort =normalizePort(process.env.HTTPSPORT || '443');
 
 var server;

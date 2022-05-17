@@ -11,4 +11,14 @@ router.get('/', function (req, res) {
 	}
 });
 
+
+/* GET home page. */
+router.post('/', function (req, res) {
+	res.set('Cache-control', 'no-cache');
+
+	console.log('hello');
+	res.sendStatus(200);
+});
+
+
 module.exports = router;

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "node ./bin/www dev",
+    "dev": "nodemon ./bin/www dev",
     "test": "mocha --exit tests/mocha-tests.js && mocha  --exit tests/integration.js "
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "eslint-plugin-security-node": "^1.1.1",
-    "mocha": "^10.0.0"
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.16"
   }
 }
