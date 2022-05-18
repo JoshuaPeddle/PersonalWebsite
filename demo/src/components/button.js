@@ -1,6 +1,8 @@
-import react, {Component, component} from 'react';
+import react, {Component} from 'react';
 
 class Button extends Component{
+  
+
 
     sayHello(){
         alert("clicked!")
