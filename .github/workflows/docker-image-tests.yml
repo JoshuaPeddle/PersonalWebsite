@@ -6,7 +6,9 @@ env:
   INTERNAL_DB: 27017
   EXTERNAL_DB: 27017
   INTERNAL_APP: 8080
-  EXTERNAL_APP: 80
+  EXTERNAL_APP: 8080
+  INTERNAL_FE: 3000
+  EXTERNAL_FE: 80
   DBNAME: "test"
   MONGODB_CONNSTRING: mongodb://localhost
   SESSION_SECRET: keyboard-cat
@@ -34,7 +36,7 @@ jobs:
         docker buildx create --name mybuilder
         docker buildx use mybuilder
         docker compose -f docker-compose.yml up --force-recreate --build -d
-        npx wait-on http://localhost:80 -t 10000
+        npx wait-on http://localhost -t 30000
         npx mocha tests/integration.js 
 
         

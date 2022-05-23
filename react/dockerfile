@@ -1,0 +1,18 @@
+FROM node:18.1.0-slim
+
+WORKDIR /app/react
+
+COPY package*.json ./
+RUN ls
+
+
+RUN npm ci --production
+
+COPY . .
+
+ENV PORT=3000
+
+EXPOSE 3000
+
+
+CMD ["npm", "start"]

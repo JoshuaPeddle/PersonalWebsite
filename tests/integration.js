@@ -21,10 +21,8 @@ describe('Notes app - Integration Tests with Mocha', function () {
 					res.should.have.status(200);
 					res.type.should.equal('text/html');
 					// Ensure page contains strings expected the login page
-					res.text.should.have.string('login');
-					res.text.should.have.string('signup');
+					res.text.should.contain.oneOf(['Login', 'React App']);
 					done();
-
 				});
 		});		
 	});	
