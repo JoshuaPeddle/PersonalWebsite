@@ -11,7 +11,7 @@ services:
     ports: 
       - "${EXTERNAL_DB}:${INTERNAL_DB}"
 
-      
+
   web-server:
     build:
       dockerfile: Dockerfile
@@ -30,7 +30,7 @@ services:
 
   react-app:
     build:
-      dockerfile: /react/dockerfilecompose
+      dockerfile: ./react/dockerfilecompose
     environment:
       - MONGODB_CONNSTRING=mongodb://${DB_USER}:${DB_PASS}@ledocker:${INTERNAL_DB}
       - DBNAME=${DBNAME}
