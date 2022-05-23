@@ -1,98 +1,136 @@
-import react, {Component} from 'react';
-
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import SimpleBottomNavigation from "./components/bottomNav";
 import "./App.css";
-import { Paper } from '@mui/material';
+import * as React from 'react';
 
 
-class App extends Component {
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { red, green } from '@mui/material/colors';
+import { TextField, Box, Button, Typography,  Zoom, Fade } from "@mui/material";
+
+
+import TypeWriter from "./components/TypeWriter";
+
+import TerminalLogin from "./components/TerminalLogin";
+
+import SendIcon from '@mui/icons-material/Send';
+
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+  palette: {
+    primary: {
+      main: "#EEF0F2bb",
+    },
+    secondary: {
+      main: "#8DE969dd",
+      light: "#8DE969aa",
+      dark: "#8DE969ff",
+    },
+    bg: {
+      main: "#16181d",
+      light: "#161821"
+    }
+
+  },
+});
+
+
+
+const title = " Hi. I'm Josh. "
+const header = ""
+const strings =
+  [
+    "Web Development.",
+    "Machine Learning.",
+    "Data science.",
+    "Video Game design."
+  ]
+
+
+class App extends React.Component {
+
 
   constructor(props){
-
-    super(props);
-    this.state ={navState : 0};
-    console.log(this.state)
-    this.onNavChange = this.onNavChange.bind(this)
+    super(props)
+    this.fadeIn = this.fadeIn.bind(this);
+    this.state ={shouldFadeIn: false}
   }
 
-  onNavChange(value){
-    console.log("got Callback "+value)
-    this.setState({navState: value}, () =>{
-      console.log(this.state)
-    })
+  fadeIn(){
+    console.log("called!")
+    this.setState({shouldFadeIn:true})
   }
 
-  getView(num){
+  render() {
+
+    return (
+
+      <ThemeProvider theme={theme}>
+        
+
+        <div className="App" style={{width:'100vw',height:'100vh', background: theme.palette.bg.light}}>
+        <TerminalLogin username={"CrashOverride"} done={this.fadeIn}  ></TerminalLogin>
+        <Fade in={this.state.shouldFadeIn} unmountOnExit>
+          <header style={{ background: theme.palette.bg.light }} className="App-header">
+          
+          
+            <TypeWriter color={"secondary.main"} title={title} header={header} strings={strings} />
+
+            <div> <p> </p></div>
+
+          
+          </header>
+          </Fade>
+
+          <Fade in={this.state.shouldFadeIn} unmountOnExit>
+          <header style={{ background: theme.palette.bg.main }} className="App-header">
+
+            { /*<ProjectView  title ="notesapp.cloud"/>*/}
+
+          </header>
+          </Fade>
+          <Fade in={this.state.shouldFadeIn} unmountOnExit>
+          <header style={{ background: theme.palette.bg.light }} className="App-header">
+            
+
+
+            <Box  sx={{
+              input: { color: 'primary.main', fontSize: 20 },
+              label: { color: 'secondary.light', fontSize: 18 },
+              textarea: { color: 'primary.main', fontSize: 20 },
+              width: '95%', maxWidth: '1080px',
+    
+            }}>
+              <Typography variant="h2" component="h2" color={'primary'}> Contact</Typography>
+              <br />
+              <TextField id="filled-basic1" label="Full Name" variant="outlined" color={'secondary'} sx={{ width: "33%", minWidth: '360px', background:"#00000030" }} />
+              <TextField id="filled-basic2" autoComplete="email" label="Email" variant="outlined" color={'secondary'} sx={{ width: "33%", minWidth: '360px' , background:"#00000030"}} />
+              <TextField id="filled-basic3" label="Phone" variant="outlined" color={'secondary'} sx={{ width: "33%", minWidth: '360px' , background:"#00000030"}} />
+              <div style={{width:"100%", minHeight:"10px"}}></div>
+              <TextField id="filled-basic4"  size="large" sx={{background:"#00000030",  textarea: { fontSize: 22,   } }} label="Message" variant="outlined" rows={15} color={'secondary'} multiline fullWidth />
+              <br />
+              <Button sx={{ borderColor: 'secondary.main'  }} variant="outlined"><SendIcon sx={{ color: 'secondary.main' }} /></Button>
+            </Box>
   
-    let view0 = (
-      <header className="App-header">
-          <TextField multiline={false} rows='11' variant='filled'  sx={{
-              backgroundColor: '#cccccc',
-              width: '90%'
-            }}/>
-  
-          <TextField multiline={true} rows='10' variant='filled' fullWidth sx={{
-              backgroundColor: '#cccccc',
-              width: '95%'
-            }}/>
-  
-          <Button variant="contained">{this.state.navState}</Button>
-  
-          <form action="../../" method="POST" 
-                className="form">
-            <button type="submit">Connected?</button>
-          </form>
-          <button/>
-      </header>
-      
-       );
-
-    let view1 = (    
-    <header className="App-header">
+          </header>
+          </Fade>
+        </div>
 
 
-    <Button variant="contained">{this.state.navState}</Button>
+      </ThemeProvider>
 
-    <form action="../../" method="POST" 
-          className="form">
-      <button type="submit">Connected?</button>
-    </form>
-    <button/>
-</header>);
+    )
+  };
 
 
-    let view2 = (
-    <header className="App-header">
 
-    <Button variant="contained">{this.state.navState}</Button>
-
-    <form action="../../" method="POST" 
-          className="form">
-      <button type="submit">Connected?</button>
-    </form>
-    <button/>
-</header>);
-
-
-    let views=[view0, view1, view2]
-
-      return views[num];
-  }
-
-
- 
-
-
-  render() {return (
-    <div className="App">
-
-    {this.getView(this.state.navState)}
-    <Paper sx={ {position:"fixed", bottom:0, left:0, right:0}}>
-    <SimpleBottomNavigation  initialState={0} onChange={this.onNavChange}></SimpleBottomNavigation>
-    </Paper>
-    </div>)};
 }
-  
+
 export default App;
