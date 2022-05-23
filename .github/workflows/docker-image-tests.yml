@@ -36,7 +36,7 @@ jobs:
         docker buildx create --name mybuilder
         docker buildx use mybuilder
         docker compose -f docker-compose.yml up --force-recreate --build -d
-        npx wait-on http://localhost -t 20000
+        npx wait-on http://localhost -t 30000
         npx mocha tests/integration.js 
 
         
