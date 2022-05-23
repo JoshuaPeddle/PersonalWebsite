@@ -21,7 +21,7 @@ describe('Notes app - Integration Tests with Mocha', function () {
 					res.should.have.status(200);
 					res.type.should.equal('text/html');
 					// Ensure page contains strings expected the login page
-					res.text.should.have.oneOf(['User does not exist', 'React App']);
+					res.text.should.contain.oneOf(['User does not exist', 'React App']);
 					done();
 				});
 		});		
