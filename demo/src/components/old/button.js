@@ -1,7 +1,7 @@
-import react, {Component, component} from 'react';
+import react, {Component} from 'react';
 
-class Listing extends Component{
-
+class Button extends Component{
+  
     sayHello(){
         alert("clicked!")
     }
@@ -10,4 +10,4 @@ class Listing extends Component{
         return <button onClick={this.sayHello}> Click me!</button>
     }
 }
-export default Listing
+export default Button
