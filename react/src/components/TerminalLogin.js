@@ -6,7 +6,7 @@ import { Zoom } from '@mui/material';
 import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
 
 import MinimizeIcon from '@mui/icons-material/Minimize';
-const timeout = 50;
+const timeout = 30;
 
 
 
@@ -132,7 +132,7 @@ class TerminalLogin extends Component {
           color: "secondary.main",
         }}>
 
-          <div style={{ width: '100%', height: '30px', display: 'flex', justifyContent: "flex-end", borderBottomStyle: "groove", borderColor: "#666" }}> <MinimizeIcon /> <HighlightOffTwoToneIcon sx={{ color: 'red' }} />   </div>
+          <div style={{ width: '100%', height: '30px', display: 'flex', justifyContent: "flex-end", borderBottomStyle: "groove", borderColor: "#666" , backgroundColor: "#aaffaa11" }}> <MinimizeIcon /> <HighlightOffTwoToneIcon sx={{ color: 'red' }} />   </div>
           <p style={{ margin: "0px" }}>
             username: {this.state.current_username}  <BlinkingCursor color={this.state.unBlinkerClr} />
           </p>
