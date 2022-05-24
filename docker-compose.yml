@@ -1,7 +1,11 @@
 version: 3.9;
-
+## react/pacage.json 'proxy' must equal web-server ipv4_address if no access to localhost
 services: 
   database:
+    networks:            
+         # you may set custom IP addresses            
+         front:                
+             ipv4_address: 192.168.0.4
     image: mongo:5.0-focal
     restart: always
     hostname: ledocker
@@ -13,6 +17,10 @@ services:
 
 
   web-server:
+    networks:            
+         # you may set custom IP addresses            
+         front:                
+             ipv4_address: 192.168.0.40              
     build:
       dockerfile: Dockerfile
     environment:
@@ -29,6 +37,10 @@ services:
 
 
   react-app:
+    networks:            
+         # you may set custom IP addresses            
+         front:                
+             ipv4_address: 192.168.0.41       
     build:
       dockerfile: ./react/dockerfilecompose
     environment:
@@ -43,3 +55,11 @@ services:
     ports:
       - "${EXTERNAL_FE}:${INTERNAL_FE}"
 
+networks:    
+   front:        
+       driver: bridge           
+       ipam:            
+          driver: default            
+          config:                
+              - subnet: 192.168.0.0/24                
+                gateway: 192.168.0.3                 
