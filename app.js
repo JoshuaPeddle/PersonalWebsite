@@ -51,7 +51,7 @@ app.use('/', authRouter);
 
 app.post('/message', (req, res) => {
 	console.log(req.body);
-
+	res.sendStatus(200);
 });
 
 /* Connect to the DB */

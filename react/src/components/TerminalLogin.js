@@ -75,7 +75,6 @@ class TerminalLogin extends Component {
     } else {
       // Done writing word
       this.setState({ done: true },()=>{this.interval = setTimeout(() => { this.setState({shouldHide:true}) }, 100) })
-      console.log('done', this.props)
       this.props.done()
     }
   }
@@ -86,7 +85,6 @@ class TerminalLogin extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.interval)
-    console.log('unmounting')
   }
 
   render() {
@@ -159,7 +157,6 @@ class BlinkingCursor extends Component {
       opacity: 0,
       increasing: true
     }
-    console.log(this.props)
     this.changeOpacity = this.changeOpacity.bind(this)
   }
 

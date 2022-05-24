@@ -60,7 +60,6 @@ class App extends React.Component {
   }
 
   fadeIn() {
-    console.log("called!")
     this.setState({ shouldFadeIn: true, showOverflow: 'visible' })
   }
 

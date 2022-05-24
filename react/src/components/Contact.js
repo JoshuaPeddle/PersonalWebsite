@@ -30,7 +30,7 @@ export default function Contact() {
           body: JSON.stringify(toSend)
         });
 
-        console.log(response);
+
     }
 
     const compileMessage = ()=>{
@@ -38,7 +38,7 @@ export default function Contact() {
         let email = getEmail()
         let phone = getPhone()
         let message = getMessage()
-        console.log(name, email, phone, message)
+
         sendMessage(name, email, phone, message)
     }
 
