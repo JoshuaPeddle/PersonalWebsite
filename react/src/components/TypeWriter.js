@@ -25,10 +25,11 @@ class TypeWriter extends Component {
 
     return (
 
-      <Box sx={{ color: this.props.color , zIndex : 1, transform:'scale(1.8)'}}>
-        <p style ={{caretColor:'transparent'}}>{this.props.title}</p>
+      <Box sx={{ p: {fontSize: "5vw"}, color: this.props.color , zIndex : 1}}>
+        
+        <h1 style ={{caretColor:'transparent', margin:'25px'}}>{this.props.title}</h1>
 
-        <p style ={{caretColor:'transparent'}}> {this.props.header} {this.state.current_text}<BlinkingCursor color={this.props.color} /></p>
+        <h4 style ={{caretColor:'transparent', margin:'25px'}}> {this.props.header} {this.state.current_text}<BlinkingCursor color={this.props.color} /></h4>
 
       </Box>
     )
@@ -48,7 +49,7 @@ class TypeWriter extends Component {
       this.setState({
         current_text: selected_string.slice(0, this.state.char_index),
         char_index: this.state.char_index + 1
-      }, () => { this.interval = setTimeout(() => { this.nextLetter() }, this.randDelay(timeout, .2)) })
+      }, () => { this.interval = setTimeout(() => { this.nextLetter() }, this.randDelay(timeout, .1)) })
 
     } else {
       // Done writing word
@@ -63,7 +64,7 @@ class TypeWriter extends Component {
       this.setState({
         current_text: selected_string.slice(0, this.state.char_index),
         char_index: this.state.char_index - 1
-      }, () => { this.interval = setTimeout(() => { this.eraseWord() }, this.randDelay(130, .3)) })
+      }, () => { this.interval = setTimeout(() => { this.eraseWord() }, this.randDelay(130, .1)) })
 
     } else {
       this.setState({
