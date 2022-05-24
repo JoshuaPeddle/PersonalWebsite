@@ -17,7 +17,7 @@ var app = express();
 
 /* declare global app */
 app.use(session({
-	name: process.env.DBNAME+parseInt((Math.random() * 10000), 10), // Just need to have diffrent names on instances running onn the same machine 1/10000 are good odds
+	name: process.env.DBNAME + parseInt((Math.random() * 10000), 10), // Just need to have diffrent names on instances running onn the same machine 1/10000 are good odds
 	secret: process.env.SESSION_SECRET,
 	resave: false,
 	saveUninitialized: true,
@@ -32,7 +32,7 @@ app.use(passport.authenticate('session'));
 
 app.use(cache);
 
-app.use(express.static(path.join(__dirname, '/view/static'), {dotfiles:'allow'}));
+app.use(express.static(path.join(__dirname, '/view/static'), { dotfiles: 'allow' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -47,6 +47,12 @@ app.get('/login/password', loginLimiter);
 /* Use Routers */
 app.use('/', indexRouter);
 app.use('/', authRouter);
+
+
+app.post('/message', (req, res) => {
+	console.log(req.body);
+
+});
 
 /* Connect to the DB */
 async function tryConnectDB() {
