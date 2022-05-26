@@ -50,7 +50,7 @@ const strings =
     "Video Game design."
   ]
 
-
+//<Pong/>
 class App extends React.Component {
 
   constructor(props) {
@@ -84,13 +84,6 @@ class App extends React.Component {
             </header>
           </Fade>
 
-          <Fade in={this.state.shouldFadeIn} >
-            <header style={{ background: theme.palette.bg.main }} className="App-header">
-
-            
-
-            </header>
-          </Fade>
           <Fade in={this.state.shouldFadeIn} >
             <header style={{ background: theme.palette.bg.light }} className="App-header">
 
