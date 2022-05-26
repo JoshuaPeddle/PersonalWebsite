@@ -1,31 +1,48 @@
 
-import { Component } from 'react';
+import React, { Component } from 'react';
 import Box from '@mui/material/Box';
+import * as ReactDOM from 'react-dom';
 
-
-const timeout = 110;
+let timeout = 110;
 const delayAfterDone = 2000;
+let timeBetweenScreenChecks = 250;
+let opacityTimeout = 40;
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
 
 class TypeWriter extends Component {
 
-
+  
   constructor(props) {
     super(props)
     this.state = {
       current_text: "",
       str_index: 0,
-      char_index: 0
+      char_index: 0,
+      off_screen: false
     }
-    this.updateString = this.nextLetter.bind(this)
-    this.eraseWord = this.eraseWord.bind(this)
-    this.randDelay = this.randDelay.bind(this)
+    this.updateString = this.nextLetter.bind(this);
+    this.eraseWord = this.eraseWord.bind(this);
+    this.randDelay = this.randDelay.bind(this);
+    this.isInScreen = this.isOnScreen.bind(this);
+
+    this.mainRef = React.createRef();
   }
+
+
+
 
   render() {
 
     return (
 
-      <Box sx={{ p: {fontSize: "5vw"}, color: this.props.color , zIndex : 1}}>
+      <Box ref={this.mainRef} sx={{ p: {fontSize: "5vw"}, color: this.props.color , zIndex : 1}}>
         
         <h1 style ={{caretColor:'transparent', margin:'25px'}}>{this.props.title}</h1>
 
@@ -76,13 +93,39 @@ class TypeWriter extends Component {
 
   }
 
+  /**
+   * Want a good balance between time between checking and usefulness of disabling the timeouts
+   */
+  isOnScreen() {
+
+    let node = ReactDOM.findDOMNode(this.mainRef.current)
+    let yLoc = node.getBoundingClientRect().y
+    if (yLoc < -200 && this.state.off_screen === false){ // More than 200 off screen
+      this.setState({off_screen:true, current_text:'', char_index:0})
+      console.log('slowing things down...')
+      opacityTimeout = 3000;
+      timeout = 3000;
+      timeBetweenScreenChecks = 500;
+    }else if (yLoc > -200 && this.state.off_screen === true){
+      this.setState({off_screen:false})
+      console.log('speeding things up...')
+      opacityTimeout = 40;
+      timeout = 110;
+    }
+    // Queue another check
+    this.screenCheckInterval = setTimeout(() => { this.isOnScreen() }, timeBetweenScreenChecks)
+  }
+
+
 
   componentDidMount() {
     this.interval = setTimeout(() => { this.nextLetter() }, timeout)
+    this.screenCheckInterval = setTimeout(() => { this.isOnScreen() }, timeBetweenScreenChecks)
   }
 
   componentWillUnmount() {
     clearTimeout(this.interval)
+    clearTimeout(this.screenCheckInterval)
   }
 
 
@@ -115,7 +158,7 @@ class BlinkingCursor extends Component {
         this.setState({ increasing: true })
       }
     }
-    this.interval = setTimeout(() => { this.changeOpacity() }, 40)
+    this.interval = setTimeout(() => { this.changeOpacity() }, opacityTimeout)
   }
 
 
@@ -129,7 +172,6 @@ class BlinkingCursor extends Component {
 
 
   render() {
-
     return (
       <Box component="span" display="inline" sx= {{
         opacity: this.state.opacity,
