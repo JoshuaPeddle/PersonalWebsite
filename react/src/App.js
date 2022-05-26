@@ -8,7 +8,7 @@ import {  Fade } from "@mui/material";
 import TypeWriter from "./components/TypeWriter";
 import TerminalLogin from "./components/TerminalLogin";
 
-
+import Links from "./components/Links";
 import Contact from "./components/Contact";
 
 const theme = createTheme({
@@ -26,6 +26,11 @@ const theme = createTheme({
       main: "#EEF0F2bb",
     },
     secondary: {
+      main: "#8DE969dd",
+      light: "#8DE969aa",
+      dark: "#8DE969ff",
+    },
+    tertiary: {
       main: "#8DE969dd",
       light: "#8DE969aa",
       dark: "#8DE969ff",
@@ -75,12 +80,22 @@ class App extends React.Component {
           <Fade in={this.state.shouldFadeIn} style={{ transitionDelay: this.state.shouldFadeIn ? '200ms' : '0ms' }}   {...(this.state.shouldFadeIn ? { timeout: 1500 } : {})} >
             <header style={{ background: theme.palette.bg.light }} className="App-header">
 
+            <Links />
+              <TypeWriter  color={"secondary.light"} title={title} header={header} strings={strings} />
 
-              <TypeWriter color={"secondary.light"} title={title} header={header} strings={strings} />
+        
 
-              <div> </div>
+            </header>
+          </Fade>
 
 
+
+          
+          <Fade in={this.state.shouldFadeIn} >
+            <header style={{ background: theme.palette.bg.main }} className="App-header">
+
+            
+            
             </header>
           </Fade>
 
