@@ -5,7 +5,7 @@ import * as ReactDOM from 'react-dom';
 
 let timeout = 110;
 const delayAfterDone = 2000;
-let timeBetweenScreenChecks = 250;
+let timeBetweenScreenChecks = 100;
 let opacityTimeout = 40;
 
 function getWindowDimensions() {
