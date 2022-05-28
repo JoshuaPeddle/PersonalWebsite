@@ -2,7 +2,7 @@ import "./App.css";
 import * as React from 'react';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import {  Fade } from "@mui/material";
+import { Fade } from "@mui/material";
 
 
 import TypeWriter from "./components/TypeWriter";
@@ -10,6 +10,8 @@ import TerminalLogin from "./components/TerminalLogin";
 
 import Links from "./components/Links";
 import Contact from "./components/Contact";
+import Hinter from "./components/Hinter";
+
 
 const theme = createTheme({
   breakpoints: {
@@ -24,6 +26,7 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#EEF0F2bb",
+      light: "#EEF0F277",
     },
     secondary: {
       main: "#8DE969dd",
@@ -75,34 +78,35 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
 
 
-        <div className="App" style={{ width: '100%', height: '100vh', background: theme.palette.bg.light, overflow:this.state.showOverflow }}>
+        <div className="App" style={{ width: '100%', height: '100vh', background: theme.palette.bg.light, overflow: this.state.showOverflow }}>
           <TerminalLogin username={"CrashOverride"} done={this.fadeIn}  ></TerminalLogin>
           <Fade in={this.state.shouldFadeIn} style={{ transitionDelay: this.state.shouldFadeIn ? '200ms' : '0ms' }}   {...(this.state.shouldFadeIn ? { timeout: 1500 } : {})} >
-            <header style={{ background: theme.palette.bg.light }} className="App-header">
+            <header style={{ background: theme.palette.bg.light, position: 'relative' }} className="App-header">
 
-            <Links />
-              <TypeWriter  color={"secondary.light"} title={title} header={header} strings={strings} />
+              <Links />
+              <TypeWriter color={"secondary.light"} title={title} header={header} strings={strings} />
 
-        
+              <div></div>
 
+
+              <Hinter hint='Projects' />
             </header>
+
           </Fade>
 
 
-
-          
           <Fade in={this.state.shouldFadeIn} >
-            <header style={{ background: theme.palette.bg.main }} className="App-header">
+            <header style={{ background: theme.palette.bg.main, position: 'relative' }} className="App-header">
 
-            
-            
+
+              <Hinter hint='Contact' />
             </header>
           </Fade>
 
           <Fade in={this.state.shouldFadeIn} >
             <header style={{ background: theme.palette.bg.light }} className="App-header">
 
-              <Contact />
+              <Contact className="contact" />
 
             </header>
           </Fade>
