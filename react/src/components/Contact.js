@@ -6,7 +6,7 @@ import SendIcon from '@mui/icons-material/Send';
 
 
 
-const alertStyle = { label: {textAlign:'center'},position: 'absolute', left: 0, right: 0, marginLeft: 'auto', marginRight: 'auto', width: '25%', top: 0, bottom: 0, marginTop: 'auto', marginBottom: 'auto', height: '40px' }
+const alertStyle = { position: 'absolute', left: 0, right: 0, marginLeft: 'auto', marginRight: 'auto', width: '25%', top: 0, bottom: 0, marginTop: 'auto', marginBottom: 'auto', height: '40px' }
 
 
 const alertTime = 2000;
@@ -101,7 +101,7 @@ export default function Contact() {
             <Button sx={{ borderColor: 'secondary.main' }} onClick={compileMessage} variant="outlined"><SendIcon sx={{ color: 'secondary.main' }} /></Button>
 
             <Fade in={showSuccess}>
-                <Alert sx={alertStyle} severity="success">Message received. Thank you! 😄</Alert>
+                <Alert sx={alertStyle} severity="success"> Message received. Thank you! 😄</Alert>
             </Fade>
 
             <Fade in={showFailure}>

@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import Box from '@mui/material/Box';
 import * as ReactDOM from 'react-dom';
 
-let timeout = 110;
+let timeout = 120;
 const delayAfterDone = 2000;
 let timeBetweenScreenChecks = 100;
-let opacityTimeout = 40;
+let opacityTimeout = 60;
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -66,7 +66,7 @@ class TypeWriter extends Component {
       this.setState({
         current_text: selected_string.slice(0, this.state.char_index),
         char_index: this.state.char_index + 1
-      }, () => { this.interval = setTimeout(() => { this.nextLetter() }, this.randDelay(timeout, .1)) })
+      }, () => { this.interval = setTimeout(() => { this.nextLetter() }, timeout) })
 
     } else {
       // Done writing word
@@ -81,7 +81,7 @@ class TypeWriter extends Component {
       this.setState({
         current_text: selected_string.slice(0, this.state.char_index),
         char_index: this.state.char_index - 1
-      }, () => { this.interval = setTimeout(() => { this.eraseWord() }, this.randDelay(130, .1)) })
+      }, () => { this.interval = setTimeout(() => { this.eraseWord() }, timeout) })
 
     } else {
       this.setState({
@@ -147,13 +147,13 @@ class BlinkingCursor extends Component {
 
   changeOpacity() {
     if (this.state.increasing === true) {
-      this.setState({ opacity: this.state.opacity + 0.1 })
-      if (this.state.opacity >= .7) {
+      this.setState({ opacity: this.state.opacity + 0.15 })
+      if (this.state.opacity >= .8) {
         this.setState({ increasing: false })
       }
 
     } else {
-      this.setState({ opacity: this.state.opacity - 0.1 })
+      this.setState({ opacity: this.state.opacity - 0.15 })
       if (this.state.opacity <= -0.51) {
         this.setState({ increasing: true })
       }
