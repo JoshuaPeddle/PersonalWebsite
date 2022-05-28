@@ -6,7 +6,7 @@ import SendIcon from '@mui/icons-material/Send';
 
 
 
-const alertStyle = { position: 'absolute', left: 0, right: 0, marginLeft: 'auto', marginRight: 'auto', width: '25%', top: 0, bottom: 0, marginTop: 'auto', marginBottom: 'auto', height: '40px' }
+const alertStyle = { position: 'absolute', left: 0, right: 0, marginLeft: 'auto', marginRight: 'auto', width: '25%',minWidth:'250px', top: 0, bottom: 0, marginTop: 'auto', marginBottom: 'auto', height: '40px' }
 
 
 const alertTime = 2000;
