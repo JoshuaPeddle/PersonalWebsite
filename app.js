@@ -10,7 +10,7 @@ const MongoStore = require('connect-mongo');
 /* Import Routers */
 var indexRouter = require('./routes/index.js');
 var authRouter = require('./routes/auth.js');
-var cache = require('./utils/cache.js');
+//var cache = require('./utils/cache.js');
 
 /* declare global app */
 var app = express();
@@ -30,18 +30,21 @@ app.use(session({
 
 app.use(passport.authenticate('session'));
 
-app.use(cache);
+//app.use(cache);
 
-app.use(express.static(path.join(__dirname, '/view/static'), { dotfiles: 'allow' }));
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static(path.join(__dirname, '/build'), { dotfiles: 'allow' }));
+}
+
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
 // Apply the rate limiting middleware
 app.get('/', homepageLimiter);
-app.post('/signup', signupLimiter);
-app.use('/signup', limiter);
-app.get('/login/password', loginLimiter);
+
 
 
 /* Use Routers */
