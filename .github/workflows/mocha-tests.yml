@@ -11,7 +11,7 @@ env:
   KEYLEN: 32
   DIGEST: sha256
   SERVER_URL: 'http://localhost:3000'
-  PORT: 8080
+
 
 
 on:
@@ -52,12 +52,17 @@ jobs:
       run: npm ci 
 
     - name: Start React front end
+      env: 
+        PORT: 3000
       working-directory: ./react
       run: npm start &
 
     - name: Install Back-end dependencies
       run: npm ci 
+
     - name: Start Back end and run tests
+      env: 
+        PORT: 8080
       run: npm run dev & npm run test
 
     
