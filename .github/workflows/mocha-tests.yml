@@ -49,7 +49,7 @@ jobs:
     
     - name: Start React front end
       working-directory: ./react
-      run: npm ci && npm start
+      run: npm ci & npm start
 
     - name: Start Back end and run tests
       working-directory: ./
