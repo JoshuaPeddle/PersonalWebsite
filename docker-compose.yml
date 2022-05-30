@@ -14,7 +14,7 @@ services:
 
   web-server:          
     build:
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     environment:
       - MONGODB_CONNSTRING=mongodb://${DB_USER}:${DB_PASS}@ledocker:${INTERNAL_DB}
       - DBNAME=${DBNAME}
