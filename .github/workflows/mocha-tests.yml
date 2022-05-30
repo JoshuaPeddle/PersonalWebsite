@@ -57,12 +57,12 @@ jobs:
       run: npm start &
 
     - name: Install Back-end dependencies
-      run: npm ci 
+      run: npm ci && npm install wait-on
 
     - name: Start Back end and run tests
       env: 
         PORT: 8080
         SERVER_URL: 'http://localhost:3000'
-      run: npm run dev & npm run test
+      run: npm run dev & npx wait-on http://localhost:3000 -t 30000 && npm run test
 
     
