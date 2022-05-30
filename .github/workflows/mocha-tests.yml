@@ -47,11 +47,17 @@ jobs:
         cache: 'npm'
     - run: npm update -g
     
+    - name: install React front end dependencies
+      working-directory: ./react
+      run: npm ci 
+
     - name: Start React front end
       working-directory: ./react
-      run: npm ci && npm start &
+      run: npm start &
 
+    - name: Install Back-end dependencies
+      run: npm ci 
     - name: Start Back end and run tests
-      run: npm ci & npm run dev & npm run test
+      run: npm run dev & npm run test
 
     
