@@ -53,6 +53,6 @@ jobs:
 
     - name: Start Back end and run tests
       working-directory: ./
-      run: npm ci && npm run dev & npm run test
+      run: npm ci & npm run dev & npm run test
 
     
