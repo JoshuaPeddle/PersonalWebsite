@@ -4,13 +4,13 @@ var passport = require('passport');
 
 var path = require('path');
 const mongo = require('./utils/db.js');
-const { homepageLimiter, signupLimiter, limiter, loginLimiter } = require('./utils/ratelimit.js');
+const { homepageLimiter } = require('./utils/ratelimit.js');
 const MongoStore = require('connect-mongo');
 
 /* Import Routers */
 var indexRouter = require('./routes/index.js');
-var authRouter = require('./routes/auth.js');
-var cache = require('./utils/cache.js');
+var messageRouter = require('./routes/message.js');
+//var cache = require('./utils/cache.js');
 
 /* declare global app */
 var app = express();
@@ -30,29 +30,25 @@ app.use(session({
 
 app.use(passport.authenticate('session'));
 
-app.use(cache);
+//app.use(cache);
 
-app.use(express.static(path.join(__dirname, '/view/static'), { dotfiles: 'allow' }));
+
+// Only using static files when DEV environment is active.
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static(path.join(__dirname, '/build'), { dotfiles: 'allow' }));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
 // Apply the rate limiting middleware
 app.get('/', homepageLimiter);
-app.post('/signup', signupLimiter);
-app.use('/signup', limiter);
-app.get('/login/password', loginLimiter);
 
 
 /* Use Routers */
 app.use('/', indexRouter);
-app.use('/', authRouter);
+app.use('/message', messageRouter);
 
-
-app.post('/message', (req, res) => {
-	console.log(req.body);
-	res.sendStatus(200);
-});
 
 /* Connect to the DB */
 async function tryConnectDB() {

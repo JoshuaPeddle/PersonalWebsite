@@ -10,8 +10,7 @@ env:
   ITERATIONS: 310000
   KEYLEN: 32
   DIGEST: sha256
-  SERVER_URL: 'http://localhost:3000'
-  PORT: 3000
+
 
 
 on:
@@ -27,8 +26,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
-        mongodb-version: [4.0, 5.0]
+        node-version: [14.x, 16.x]
+        mongodb-version: [4.4, 5.0]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -46,6 +45,24 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm update -g
-    - run: npm ci
-    - run: npm run dev & npm run test
+    
+    - name: install React front end dependencies
+      working-directory: ./react
+      run: npm ci 
+
+    - name: Start React front end
+      env: 
+        PORT: 3000
+      working-directory: ./react
+      run: npm start &
+
+    - name: Install Back-end dependencies
+      run: npm ci && npm install wait-on
+
+    - name: Start Back end and run tests
+      env: 
+        PORT: 8080
+        SERVER_URL: 'http://localhost:3000'
+      run: npm run dev & npx wait-on http://localhost:3000 -t 30000 && npm run test
+
     
