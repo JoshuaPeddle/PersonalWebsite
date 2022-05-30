@@ -10,7 +10,6 @@ env:
   ITERATIONS: 310000
   KEYLEN: 32
   DIGEST: sha256
-  SERVER_URL: 'http://localhost:3000'
 
 
 
@@ -27,7 +26,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [16.x, 18.x]
         mongodb-version: [4.0, 5.0]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
@@ -63,6 +62,7 @@ jobs:
     - name: Start Back end and run tests
       env: 
         PORT: 8080
+        SERVER_URL: 'http://localhost:3000'
       run: npm run dev & npm run test
 
     
