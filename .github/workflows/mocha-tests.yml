@@ -46,9 +46,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm update -g
+    
     - name: Start React front end
       working-directory: ./react
-      run: cd react && npm ci && npm start
+      run: npm ci && npm start
 
     - name: Start Back end and run tests
       working-directory: ./
