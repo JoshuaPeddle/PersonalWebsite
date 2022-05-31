@@ -31,7 +31,7 @@ app.use(session({
 app.use(passport.authenticate('session'));
 
 //app.use(cache);
-
+//test
 
 // Only using static files when DEV environment is active.
 if (process.env.NODE_ENV === 'production') {
